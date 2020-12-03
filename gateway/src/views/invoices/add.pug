@@ -1,0 +1,16 @@
+extends ../layout.pug
+
+block content
+  main
+    .container
+      .row
+        .three.columns &nbsp;
+        .six.columns
+          .card
+            h2.card-title Choose the client
+            .card-body
+              ul
+                each client in clients
+                  li
+                    a(href='/invoices/new?clientId=' + client.id)= client.name
+            .card-actions &nbsp;

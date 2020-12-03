@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  migrate:
+    build: ./pg/schema
+    depends_on:
+      - pg
+    environment:
+      PGDATABASE: ${PGDATABASE}
+      PGHOST: pg
+      PGPASSWORD: ${PGPASSWORD}
+      PGUSER: ${PGUSER}
+      WAIT_HOSTS: pg:5432
+    volumes:
+      - ./pg/schema/migrations:/usr/src/migrations
+  pg:
+    environment:
+      POSTGRES_DB: ${PGDATABASE}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_USER: ${PGUSER}
+    image: postgres:13
+    ports:
+      - "15432:5432"
+    restart: always
+    volumes:
+      - ./pg/data:/var/lib/postgresql/data
+  nginx:
+    build: ./nginx
+    depends_on:
+      - gateway
+    ports:
+      - "8910:80"
+    restart: always
+    volumes:
+      - ./nginx/static:/usr/share/nginx/html
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - pg
+      - jwt-maker
+    environment:
+      NODE_ENV: development
+      PGDATABASE: ${PGDATABASE}
+      PGHOST: pg
+      PGPASSWORD: ${PGPASSWORD}
+      PGUSER: ${PGUSER}
+      PORT: 80
+      WAIT_HOSTS: pg:5432,jwt-maker:80
+    volumes:
+      - ./gateway/src:/usr/src/gateway/src
+  jwt-maker:
+    build:
+      context: ./jwt-maker
+      dockerfile: Dockerfile.dev
+    environment:
+      DOC_PORT: 8080
+      JWT_SECRET: ${JWT_SECRET}
+      NODE_ENV: development
+      PORT: 80
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./jwt-maker/src:/usr/src/jwt-maker/src

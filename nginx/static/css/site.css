@@ -1,0 +1,70 @@
+html, body {
+  background-color: #EFEFEF;
+}
+
+form.inline {
+  margin: 0;
+}
+
+form.inline button {
+  margin: 0;
+}
+
+.cb {
+  width: 50px;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  display: block;
+  text-align: right;
+}
+
+.down {
+  margin-top: 2em;
+}
+
+.error {
+  background-color: pink;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.card {
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  padding: 2rem 1rem 0 1rem;
+}
+
+.card-body {
+  padding: 0 1rem;
+}
+
+.card-left {
+  padding-left: 1rem;
+}
+
+.card-right {
+  padding-right: 1rem;
+}
+
+.card-body p {
+  margin: .25rem 0;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.nav-button {
+  background-color: white;
+}

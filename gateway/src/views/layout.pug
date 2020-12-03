@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title ProDev Invoicify
+    link(rel="stylesheet", href="/css/normalize.css")
+    link(rel="stylesheet", href="/css/skeleton.css")
+    link(rel="stylesheet", href="/css/site.css")
+    script(src="/js/site.js")
+  body
+    if user
+      .container
+        .row
+          form(action="/logout", method="post")
+            .right
+              button.button.nav-button Sign out
+    block content

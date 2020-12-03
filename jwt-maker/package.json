@@ -1,0 +1,23 @@
+{
+  "name": "prodev-invoicify-jwt-service",
+  "version": "1.0.0",
+  "description": "The JWT service for the application.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.mjs",
+    "start": "node src/server.mjs"
+  },
+  "author": "Professional Development <prodev@hackreactor.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "swagger-jsdoc": "^6.0.0-rc.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "swagger-ui-dist": "^3.37.2"
+  }
+}

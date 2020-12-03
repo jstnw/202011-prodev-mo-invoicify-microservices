@@ -1,0 +1,15 @@
+extends ../layout.pug
+
+block content
+  main
+    .container
+      .card
+        h1.card-title Add a new client
+        form(method="post", action="/clients")
+          .card-body
+              label(for="name") Client name
+              input#name.u-full-width(type="text", placeholder="Acme Industries", required, name="name")
+          .card-actions
+            button.button-primary Create client
+            | &nbsp;
+            a.button(href="/") Cancel

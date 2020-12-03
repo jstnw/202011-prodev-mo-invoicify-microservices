@@ -1,0 +1,17 @@
+{
+  "name": "invoicify-schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "db-migrate": "^0.11.11",
+    "db-migrate-pg": "^1.2.2",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "migrate": "db-migrate up"
+  },
+  "author": "",
+  "license": "ISC"
+}

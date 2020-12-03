@@ -1,0 +1,102 @@
+extends layout.pug
+
+block content
+  .container
+    .card
+      if openTime
+        .row
+          h2.card-title You have an open time slot that you're working on.
+        form(method="post", action='/times/' + openTime.id + '/close-time')
+          .row
+            .four.columns
+              label Client
+              div= openTime.name
+            .three.columns
+              label Started at
+              div= openTime.startedAt
+            .three.columns
+              label(for="day") Day
+              input#day.u-full-width(type="date", name="day", required)
+            .two.columns
+              label(for="end") End time
+              input#end.u-full-width(type="time", name="end", required)
+          .row
+            .seven.columns
+              | &nbsp;
+            .five.columns
+              button.button Close out time
+      else
+        form(method="post", action="/times/add")
+          .row
+            h2.card-title Add new time for a client
+          .row
+            .five.columns
+              div.card-left
+                label(for="clientId") Client
+                select#clientId.u-full-width(required, name="clientId")
+                  each val in clients
+                    option(value=val.id)= val.name
+            .three.columns
+              label(for="day") Day
+              input#day.u-full-width(type="date", name="day", required)
+            .two.columns
+              label(for="start") Start time
+              input#start.u-full-width(type="time", name="start", required)
+            .two.columns
+              div.card-right
+                label(for="end") End time
+                input#end.u-full-width(type="time", name="end")
+          .row
+            div.card-actions
+              button.button Add new time
+
+  .container.down
+    .row
+      .five.columns
+        .card
+          h2.card-title Unbilled time
+          .card-body
+            if unbilledClients.length
+              p To bill your clients, start a new invoice
+              table.u-full-width
+                thead
+                  tr
+                    th Name
+                    th Unbilled hours
+                tbody
+                  each val in unbilledClients
+                    tr
+                      td= val.name
+                      td= val.age
+            else
+              p You have no unbilled time
+          .card-actions
+            a.button(href="/clients/new") Add a new client
+      .seven.columns
+        .card
+          h2.card-title Invoices
+          .card-body
+            if unpaidInvoices.length
+              table.u-full-width
+                thead
+                  tr
+                    th Client
+                    th Number
+                    th Status
+                    th &nbsp;
+                tbody
+                  each invoice in unpaidInvoices
+                    tr
+                      td= invoice.clientName
+                      td= invoice.number
+                      td= invoice.status
+                      td
+                        form.inline(action="/invoices/" + invoice.id + "/status", method="post")
+                          if invoice.statusId === 1
+                            button.button Generate
+                          else
+                            button.button-primary Paid
+            else
+              p You have no unpaid time
+          .card-actions
+            a.button(href="/invoices/new") Start a new invoice

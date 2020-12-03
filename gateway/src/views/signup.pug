@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+  main
+    form(method="post", action="/signup")
+      .container
+        .row
+          .three.columns &nbsp;
+          .six.columns
+            .card
+              h1.card-title Sign Up
+              .card-body
+                p
+                  | Already have an account?
+                  |
+                  a(href="/login") Log in
+                if message
+                  .error= message
+                label(for="email") Your email
+                input#email.u-full-width(type="email", placeholder="you@example.com", required, value=email, name="email")
+                label(for="password") Your password
+                input#password.u-full-width(type="password", required, name="password")
+              .card-actions
+                button.button-primary Sign up

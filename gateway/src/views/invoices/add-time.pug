@@ -1,0 +1,32 @@
+extends ../layout.pug
+
+block content
+  main
+    form(action="/invoices", method="post")
+      input(type="hidden", name="clientId", value=client.id)
+      .container
+        .card
+          h2.card-title= client.name
+          .card-body
+            label(for="number") Invoice number
+            input#number.u-full-width(type="text", name="number", required, placeholder="ABC-12345")
+            p Choose the times that you want to add to the invoice.
+            table.u-full-width
+              thead
+                tr
+                  th.cb &nbsp
+                  th Date started
+                  th Time started
+                  th Date ended
+                  th Time ended
+              tbody
+                each time in unbilledTime
+                  tr
+                    td.center
+                      input(type="checkbox", name="timeIds[]", value=time.id, checked)
+                    td= time.startDay
+                    td= time.startTime
+                    td= time.endDay
+                    td= time.endTime
+          .card-actions
+            button.button-primary Create invoice
