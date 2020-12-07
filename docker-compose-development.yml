@@ -10,6 +10,7 @@ services:
       PGPASSWORD: ${PGPASSWORD}
       PGUSER: ${PGUSER}
       WAIT_HOSTS: pg:5432
+      WAIT_HOSTS_TIMEOUT: 60
     volumes:
       - ./pg/schema/migrations:/usr/src/migrations
   pg:
@@ -47,6 +48,7 @@ services:
       PGUSER: ${PGUSER}
       PORT: 80
       WAIT_HOSTS: pg:5432,jwt-maker:80
+      WAIT_HOSTS_TIMEOUT: 60
     volumes:
       - ./gateway/src:/usr/src/gateway/src
   jwt-maker:

@@ -34,6 +34,10 @@ _nginx/static_ directory which is served by an NGINX Web server.
 To run this application, you will need to install the following software.
 
 * [Docker](https://www.docker.com/) for your specific operating system
+
+To change the implementation of the Node-based services, you'll want to use
+the following version of Node.
+
 * Node.js v15+
 
 There is an _.nvmrc_ file that you can use by typing `nvm use` in the root
@@ -52,6 +56,12 @@ docker-compose -f docker-compose-development.yml --env-file .env.dev up
 ```
 
 Then, you can open the application at http://localhost:8910.
+
+If it takes Docker Compose more than 60 seconds to start some services on your
+computer, you may need to increase the value of `WAIT_HOSTS_TIMEOUT` in the
+_docker-compose-development.yml_ file. Both the **migrate** and **gateway**
+services use this mechanism to start only after their dependent services are
+"properly" started, that is, responding on appropriate ports.
 
 **Note**: The migrate service runs at startup, checks to see if the database is
 up to date with migrations, and then quits. It is not a long-running service.
